@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Edit Task</h5>
+        <form hx-post="/tasks/{{ task.id }}/edit" hx-target="#task-{{ task.id }}">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <input type="text" name="title" class="form-control" 
+                           value="{{ task.title }}" required>
+                </div>
+                <div class="col-md-6">
+                    <input type="date" name="target_date" class="form-control"
+                           value="{{ task.target_date.strftime('%Y-%m-%d') if task.target_date }}">
+                </div>
+                <div class="col-md-6">
+                    <select name="priority" class="form-select">
+                        <option value="0" {% if task.priority == 0 %}selected{% endif %}>Low Priority</option>
+                        <option value="1" {% if task.priority == 1 %}selected{% endif %}>Medium Priority</option>
+                        <option value="2" {% if task.priority == 2 %}selected{% endif %}>High Priority</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <select name="status" class="form-select">
+                        <option value="pending" {% if task.status == 'pending' %}selected{% endif %}>Pending</option>
+                        <option value="in_progress" {% if task.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+                        <option value="completed" {% if task.status == 'completed' %}selected{% endif %}>Completed</option>
+                        <option value="on_hold" {% if task.status == 'on_hold' %}selected{% endif %}>On Hold</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" 
+                            hx-get="/tasks/{{ task.id }}/view"
+                            hx-target="#task-{{ task.id }}">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+{% for task in tasks %}
+<div class="card mb-2" id="task-{{ task.id }}">
+    <div class="card-body">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                    <input type="checkbox" 
+                           {% if task.completed %}checked{% endif %}
+                           hx-post="/tasks/{{ task.id }}/toggle"
+                           hx-target="#task-content"
+                           class="form-check-input me-2">
+                    <span class="{% if task.completed %}text-muted text-decoration-line-through{% endif %}">
+                        {{ task.title }}
+                    </span>
+                </div>
+                {% if task.target_date %}
+                <small class="text-muted">Due: {{ task.target_date.strftime('%Y-%m-%d') }}</small>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex gap-2">
+                    <select class="form-select form-select-sm" 
+                            hx-post="/tasks/{{ task.id }}/update-status"
+                            hx-target="#task-content"
+                            name="status">
+                        <option value="pending" {% if task.status == 'pending' %}selected{% endif %}>Pending</option>
+                        <option value="in_progress" {% if task.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+                        <option value="completed" {% if task.status == 'completed' %}selected{% endif %}>Completed</option>
+                        <option value="on_hold" {% if task.status == 'on_hold' %}selected{% endif %}>On Hold</option>
+                    </select>
+                    <select class="form-select form-select-sm"
+                            hx-post="/tasks/{{ task.id }}/update-status"
+                            hx-target="#task-content"
+                            name="priority">
+                        <option value="0" {% if task.priority == 0 %}selected{% endif %}>Low</option>
+                        <option value="1" {% if task.priority == 1 %}selected{% endif %}>Medium</option>
+                        <option value="2" {% if task.priority == 2 %}selected{% endif %}>High</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2 text-end">
+                <button class="btn btn-secondary btn-sm"
+                        hx-get="/tasks/{{ task.id }}/edit"
+                        hx-target="#task-{{ task.id }}">
+                    <i class="bi bi-pencil"></i> Edit
+                </button>
+                <button class="btn btn-danger btn-sm"
+                        hx-delete="/tasks/{{ task.id }}/delete"
+                        hx-target="#task-content">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="text-center text-muted">
+    No tasks yet. Add one above!
+</div>
+{% endfor %}

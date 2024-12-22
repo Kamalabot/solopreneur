@@ -1,0 +1,58 @@
+<div class="position-sticky pt-3" id="sidebar">
+    <button class="btn btn-outline-secondary ms-auto" id="toggleSidebar">
+        <i class="bi bi-chevron-left"></i>
+    </button>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link active" href="/">
+                <i class="bi bi-house-door"></i>
+                <span class="menu-text">Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" 
+               hx-get="/tasks/today" 
+               hx-target="#task-content">
+                <i class="bi bi-calendar-day"></i>
+                <span class="menu-text">Today's Tasks</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" 
+               hx-get="/tasks/upcoming" 
+               hx-target="#task-content">
+                <i class="bi bi-calendar-week"></i>
+                <span class="menu-text">Upcoming Tasks</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" 
+               hx-get="/tasks/priority" 
+               hx-target="#task-content">
+                <i class="bi bi-star"></i>
+                <span class="menu-text">Priority Tasks</span>
+            </a>
+        </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span class="menu-text">Categories</span>
+        <a class="link-secondary" 
+           hx-get="/categories/manage" 
+           hx-target="#task-content">
+            <i class="bi bi-gear"></i>
+        </a>
+    </h6>
+    <ul class="nav flex-column mb-2" id="sidebar-category-list">
+        {% for category in categories %}
+        <li class="nav-item">
+            <a class="nav-link" 
+               hx-get="/tasks/category/{{ category.id }}" 
+               hx-target="#task-content">
+                <span class="color-dot" style="background-color: {{ category.color }}"></span>
+                <span class="menu-text">{{ category.name }}</span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

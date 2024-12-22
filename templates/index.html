@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Add New Task</h5>
+                <form hx-post="/tasks" hx-target="#task-content" class="d-flex">
+                    <input type="text" name="title" class="form-control me-2" placeholder="Enter task..." required>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div id="task-content">
+                {% include 'partials/task_list.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

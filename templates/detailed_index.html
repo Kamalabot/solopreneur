@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Add New Task (Detailed)</h5>
+                <form hx-post="/detailed/tasks" hx-target="#detailed-task-list">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" name="title" class="form-control" placeholder="Enter task..." required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="date" name="target_date" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <select name="priority" class="form-select">
+                                <option value="0">Low Priority</option>
+                                <option value="1">Medium Priority</option>
+                                <option value="2">High Priority</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select name="status" class="form-select">
+                                <option value="pending">Pending</option>
+                                <option value="in_progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                                <option value="on_hold">On Hold</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Add Task</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div id="detailed-task-list">
+                <div id="task-content">
+                    {% include 'partials/task_list_with_status.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

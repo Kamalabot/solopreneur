@@ -1,0 +1,166 @@
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-check-input:checked + span {
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 56px; /* Height of navbar */
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+}
+
+.sidebar .nav-link.active {
+    color: #2470dc;
+}
+
+.sidebar .nav-link:hover {
+    color: #2470dc;
+}
+
+.sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+.sidebar .nav-link i {
+    margin-right: 8px;
+    color: #727272;
+}
+
+.sidebar .nav-link:hover i {
+    color: #2470dc;
+}
+
+/* Main content adjustment */
+.main-content {
+    margin-left: 240px; /* Width of sidebar */
+}
+
+@media (max-width: 767.98px) {
+    .sidebar {
+        position: static;
+        height: auto;
+    }
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+/* Add these styles to your existing sidebar CSS */
+
+.sidebar .nav-link,
+.sidebar .link-secondary {
+    cursor: pointer;
+}
+
+/* Optional: Add hover effect for better interaction feedback */
+.sidebar .nav-link:hover,
+.sidebar .link-secondary:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Add to your existing CSS 
+.color-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+*/
+/* Flash messages styling */
+.flash-messages {
+    position: fixed;
+    top: 60px;  /* Adjust based on your navbar height */
+    right: 20px;
+    z-index: 1050;  /* Higher than sidebar */
+    max-width: 400px;
+    min-width: 300px;
+}
+
+.alert {
+    margin: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    animation: fadeInOut 5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+#sidebar {
+    transition: all 0.3s ease;
+    width: 240px;
+}
+
+#sidebar.collapsed {
+    width: 60px;
+}
+
+#sidebar.collapsed .menu-text {
+    display: none;
+}
+
+#sidebar.collapsed .sidebar-heading {
+    display: none;
+}
+
+#sidebar.collapsed .color-dot {
+    margin-right: 0;
+}
+
+#sidebar.collapsed .nav-link {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+#sidebar.collapsed .nav-link i {
+    margin-right: 0;
+}
+
+/* Update main content margin for collapsed state */
+.main-content {
+    margin-left: 240px;
+    transition: margin-left 0.3s ease;
+}
+
+body:has(#sidebar.collapsed) .main-content {
+    margin-left: 60px;
+}
+
+@media (max-width: 767.98px) {
+    .main-content {
+        margin-left: 0;
+    }
+    body:has(#sidebar.collapsed) .main-content {
+        margin-left: 0;
+    }
+}
+
+.color-dot {
+    width: 10px; /* Adjust dot size */
+    height: 10px; /* Adjust dot size */
+    border-radius: 50%; /* Make it circular */
+    display: inline-block; /* Ensure it displays inline */
+    margin-right: 0.5rem; /* Space between dot and text */
+}
